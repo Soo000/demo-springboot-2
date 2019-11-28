@@ -30,6 +30,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>		
 	</dependencies>
 
 	<build>
@@ -49,5 +54,6 @@
 		<module>demo-springboot-2-jpa</module>
 		<module>demo-springboot-2-redis</module>
 		<module>demo-springboot-2-redis-jpa</module>
+		<module>demo-springboot-2-jpa-elasticsearch</module>
 	</modules>
 </project>
