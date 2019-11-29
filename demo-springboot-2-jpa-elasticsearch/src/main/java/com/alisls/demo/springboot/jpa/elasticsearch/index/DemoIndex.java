@@ -2,9 +2,11 @@ package com.alisls.demo.springboot.jpa.elasticsearch.index;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.stereotype.Component;
 
 import com.alisls.demo.springboot.jpa.elasticsearch.pojo.Item;
 
+@Component
 public class DemoIndex {
 
 	@Autowired

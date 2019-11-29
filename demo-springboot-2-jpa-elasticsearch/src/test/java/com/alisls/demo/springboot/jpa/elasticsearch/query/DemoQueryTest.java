@@ -1,4 +1,4 @@
-package com.alisls.demo.springboot.jpa.elasticsearch.index;
+package com.alisls.demo.springboot.jpa.elasticsearch.query;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,14 +8,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class DemoIndexTest {
+public class DemoQueryTest {
 	
 	@Autowired
-	DemoIndex demoIndex;
+	DemoQuery demoQuery;
 	
 	@Test
-	public void createIndexTest() {
-		demoIndex.createIndex();
+	public void queryAllTest() {
+		demoQuery.findAll();
+	}
+	
+	@Test
+	public void queryByPriceTest() {
+		demoQuery.findByPriceBetween();
 	}
 
 }
