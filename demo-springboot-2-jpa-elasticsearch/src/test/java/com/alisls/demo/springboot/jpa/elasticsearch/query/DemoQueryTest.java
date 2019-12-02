@@ -22,5 +22,14 @@ public class DemoQueryTest {
 	public void queryByPriceTest() {
 		demoQuery.findByPriceBetween();
 	}
+	
+	@Test
+	public void query() {
+		demoQuery.query();
+	}
 
+	@Test
+	public void aggregation() {
+		demoQuery.aggregation();
+	}
 }
