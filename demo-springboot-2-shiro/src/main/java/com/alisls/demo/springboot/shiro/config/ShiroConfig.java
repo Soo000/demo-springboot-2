@@ -41,18 +41,6 @@ public class ShiroConfig {
     }
 
     /**
-     * 自定义 realm
-     * @return
-     */
-    @Bean
-    public MyRealm myRealm() {
-        MyRealm myRealm = new MyRealm();
-        // 设置凭证匹配器
-        myRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-        return myRealm;
-    }
-
-    /**
      * RedisManager
      * @return
      */
@@ -97,6 +85,18 @@ public class ShiroConfig {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
+    }
+    
+    /**
+     * 自定义 realm
+     * @return
+     */
+    @Bean
+    public MyRealm myRealm() {
+        MyRealm myRealm = new MyRealm();
+        // 设置凭证匹配器
+        myRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return myRealm;
     }
 
     /**
