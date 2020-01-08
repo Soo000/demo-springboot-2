@@ -33,8 +33,13 @@ public class MySessionManager extends DefaultWebSessionManager {
         String sessionId = WebUtils.toHttp(request).getHeader(AUTHORIZATION);
 
         if (sessionId != null) { // 如果从 request 请求 header 中获取 sessionId 不为空
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, REFERENCED_SESSION_ID_SOURCE);
+        	request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, 
+        			REFERENCED_SESSION_ID_SOURCE);
+        	
+        	// 放回 sessionId
+        	request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
+            
+        	// 设置 sessionId 有效
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
 
             logger.info("Session 管理器检测到 AUTHORIZATION token 使用此token作为 Session");

@@ -71,6 +71,8 @@ public class ShiroConfig {
     @Bean
     public SessionManager sessionManager() {
         MySessionManager mySessionManager = new MySessionManager();
+        // 设置 Sesssion 默认过期时间，默认 30 分钟（30分钟内不做任何操作），单位毫秒；这里设置1分钟仅供测试
+        mySessionManager.setGlobalSessionTimeout(60000);
         // 设置 SessionDAO
         mySessionManager.setSessionDAO(redisSessionDAO());
         return mySessionManager;
@@ -130,23 +132,31 @@ public class ShiroConfig {
         // 设置无权限时跳转的 url;
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
 
-        // 设置拦截器
+        // 设置拦截器，注意这里是 LinkedHashMap，否则是无序的，部分路径无法拦截，时有时无。
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 游客，开发权限
         filterChainDefinitionMap.put("/guest/**", "anon");
+        
         // 用户，需要角色权限 “user”
         filterChainDefinitionMap.put("/user/**", "roles[user]");
         // 管理员，需要角色权限 “admin”
         filterChainDefinitionMap.put("/role/list", "roles[admin]");
-        // 开放登陆接口
-        filterChainDefinitionMap.put("/login", "anon");
-        // 其余接口一律拦截
-        // 主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
+        
+        // 必须有视频更新权限才可以访问
+        filterChainDefinitionMap.put("/video/update", "perms[video_update]");
+        
+        // 开放登录接口
+        filterChainDefinitionMap.put("/login", "anon");        
+        // 开放登出接口
+        filterChainDefinitionMap.put("/logout", "logout");
+        
+        /*
+                      *  其余接口一律拦截
+                      *  放在所有权限设置的最后，不然会导致所有 url 都被拦截，必须登录后访问，因为过滤链是从上到下执行
+         */
         filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        System.out.println("Shiro拦截器工厂类注入成功");
-
         return shiroFilterFactoryBean;
     }
 
