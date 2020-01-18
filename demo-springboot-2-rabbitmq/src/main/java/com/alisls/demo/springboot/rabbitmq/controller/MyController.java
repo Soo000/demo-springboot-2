@@ -26,7 +26,7 @@ public class MyController {
     @GetMapping(value = "send")
     public String send() {
         String content = "Date:" + System.currentTimeMillis();
-        //发送默认交换机对应的的队列kinson
+        // 发送默认交换机对应的的队列kinson
         amqpTemplate.convertAndSend("kinson", content);
         return content;
     }
@@ -39,10 +39,10 @@ public class MyController {
     @GetMapping(value = "sendMore")
     public String sendMore() {
         List<String> result = new ArrayList<String>();
-        //发送10条数据
+        // 发送10条数据
         for (int i = 0; i < 10; i++) {
             String content = "第" + (i + 1) + "次发送 Date:" + System.currentTimeMillis();
-            //发送默认交换机对应的的队列kinson,此时有两个消费者MyReceiver1和MyReceiver2,每条消息只会被消费一次
+            // 发送默认交换机对应的的队列kinson,此时有两个消费者MyReceiver1和MyReceiver2,每条消息只会被消费一次
             amqpTemplate.convertAndSend("kinson", content);
             result.add(content);
         }
@@ -57,12 +57,12 @@ public class MyController {
     @GetMapping(value = "sendMoreQueue")
     public String sendMoreQueue() {
         List<String> result = new ArrayList<String>();
-        //发送10条数据
+        // 发送10条数据
         for (int i = 0; i < 10; i++) {
             String content = "第" + (i + 1) + "次发送 Date:" + System.currentTimeMillis();
-            //发送默认交换机对应的的队列kinson
+            // 发送默认交换机对应的的队列kinson
             amqpTemplate.convertAndSend("kinson", content);
-            //发送默认交换机对应的的队列kinson2
+            // 发送默认交换机对应的的队列kinson2
             amqpTemplate.convertAndSend("kinson2", content);
             result.add(content);
         }
@@ -75,7 +75,6 @@ public class MyController {
     @GetMapping(value = "ackSend")
     public String ackSend() {
         senderService.send();
-
         return "ok";
     }
 
