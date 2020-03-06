@@ -45,6 +45,7 @@
 	<modules>
 		<module>demo-springboot-2-web</module>
 		<module>demo-springboot-2-freemarker</module>
+		<module>demo-springboot-2-security</module>
 		<module>demo-springboot-2-shiro</module>
 		<module>demo-springboot-2-rabbitmq</module>
 		<module>demo-springboot-2-redis</module>
@@ -52,4 +53,5 @@
 		<module>demo-springboot-2-jpa-elasticsearch</module>
 		<module>demo-springboot-2-jpa</module>
 	</modules>
+
 </project>

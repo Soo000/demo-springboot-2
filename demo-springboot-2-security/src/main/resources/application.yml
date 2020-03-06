@@ -1,0 +1,10 @@
+server:
+  port: 17001
+
+spring:
+  application:
+    name: demo-springboot-security
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
