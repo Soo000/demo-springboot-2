@@ -1,0 +1,9 @@
+server:
+  port: 10011
+
+swagger:
+  prop:
+    title: Swagger 样例
+    version: 1.0
+    description: Swagger 样例工厂
+    base-package: com.alisls.demo.springboot.swagger
