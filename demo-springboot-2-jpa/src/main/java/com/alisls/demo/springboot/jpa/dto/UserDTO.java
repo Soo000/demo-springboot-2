@@ -1,35 +1,33 @@
 package com.alisls.demo.springboot.jpa.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
+/**
+ * 用户DTO
+ *
+ * @author Ke Wang
+ */
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class UserDTO extends BaseDTO implements Serializable {
 
 	private static final long serialVersionUID = -5171786490573585406L;
-	
-	private Integer userId;
+
+    private Long id;
+
     private String username;
 
-    public Integer getUserId() {
-        return userId;
-    }
+    private String nickname;
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private String email;
 
-    public String getUsername() {
-        return username;
-    }
+    private Integer age;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                '}';
-    }
 }

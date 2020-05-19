@@ -1,30 +1,43 @@
 package com.alisls.demo.springboot.jpa.entity;
 
-import javax.persistence.Column;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
 
-@Entity(name = "my_user")
-public class UserDO {
+/**
+ * 用户DO
+ *
+ * @author Ke Wang
+ */
+@Entity
+@Table(name = "sys_user")
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class UserDO extends BaseDO {
 
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    private Long id;
+
     private String username;
 
-    public Integer getUserId() {
-        return userId;
-    }
+    private String nickname;
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private String email;
 
-    public String getUsername() {
-        return username;
-    }
+    private Integer age;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private String password;
+
+    //private Date birthdate;
+
+    //private Short deleted;
+
 }

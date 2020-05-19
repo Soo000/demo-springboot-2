@@ -24,7 +24,7 @@ public class RedisConfig {
      * 当不指定缓存的 key 时，SpringBoot 会使用 SimpleKeyGenerator 生成 key。
      */
 //  @Bean
-    public KeyGenerator wiselyKeyGenerator() {
+    public KeyGenerator keyGenerator() {
         // key前缀，用于区分不同项目的缓存，建议每个项目单独设置
         final String PRE_KEY = "test";
         final char sp = ':';
@@ -49,13 +49,15 @@ public class RedisConfig {
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {
         // 更改值的序列化方式，否则在Redis可视化软件中会显示乱码。默认为JdkSerializationRedisSerializer
-        RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair
-                .fromSerializer(new GenericJackson2JsonRedisSerializer());
+        RedisSerializationContext.SerializationPair<Object> pair =
+                RedisSerializationContext.SerializationPair
+                    .fromSerializer(new GenericJackson2JsonRedisSerializer());
 
-        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration
-                .defaultCacheConfig()
-                .serializeValuesWith(pair)      // 设置序列化方式
-                .entryTtl(Duration.ofHours(1)); // 设置过期时间
+        RedisCacheConfiguration defaultCacheConfig =
+                RedisCacheConfiguration
+                    .defaultCacheConfig()
+                    .serializeValuesWith(pair)      // 设置序列化方式
+                    .entryTtl(Duration.ofHours(1)); // 设置过期时间
 
         return RedisCacheManager
                 .builder(RedisCacheWriter.nonLockingRedisCacheWriter(factory))
