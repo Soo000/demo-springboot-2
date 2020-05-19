@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * 用户DTO
@@ -29,5 +30,7 @@ public class UserDTO extends BaseDTO implements Serializable {
     private String email;
 
     private Integer age;
+
+    Set<RoleDTO> roles;
 
 }
