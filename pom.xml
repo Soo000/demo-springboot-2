@@ -55,6 +55,7 @@
         <module>demo-springboot-2-oauth</module>
         <module>demo-springboot2-swagger</module>
 		<module>demo-springboot-2-swagger</module>
-	</modules>
+        <module>demo-springboot-2-mybatis-plus</module>
+    </modules>
 
 </project>
