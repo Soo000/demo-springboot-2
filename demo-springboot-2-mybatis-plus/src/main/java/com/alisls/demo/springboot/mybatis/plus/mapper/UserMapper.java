@@ -12,6 +12,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<UserDO> {
 
+    UserDO getUserByUsername(String username);
+
     UserAddrDTO getUserAndAddr(String username);
 
     UserAddrDTO getAddrAndUser(String addrName);

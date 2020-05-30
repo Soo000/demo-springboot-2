@@ -20,5 +20,7 @@ public class UserDTO {
     private String lastName;
     private Integer age;
     private Integer gender;
+    private Integer deleted;
     private Integer tenantId;
+
 }

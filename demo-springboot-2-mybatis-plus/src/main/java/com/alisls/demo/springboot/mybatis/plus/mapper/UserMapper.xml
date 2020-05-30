@@ -6,6 +6,16 @@
         select count(1) from user
     </select>
 
+    <select id="getUserByUsername" resultType="com.alisls.demo.springboot.mybatis.plus.entity.UserDO">
+        select u.id, u.username, u.last_name as lastName, u.deleted, u.tenant_id as tenantId
+        from tbl_user u
+        <where>
+            <if test="username != null">
+                u.username like concat(concat('%', #{username}),'%')
+            </if>
+        </where>
+    </select>
+
     <select id="getUserAndAddr" resultType="com.alisls.demo.springboot.mybatis.plus.dto.UserAddrDTO">
         select u.id, u.username, a.addr_name as addrName
         from tbl_user u

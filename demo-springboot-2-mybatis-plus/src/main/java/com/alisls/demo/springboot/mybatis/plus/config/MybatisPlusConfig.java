@@ -19,8 +19,9 @@ import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.schema.Column;
 
 /**
- * @author miemie
- * @since 2018-08-10
+ * 多租户配置
+ *
+ * @author Ke Wang
  */
 @Configuration
 @MapperScan("com.alisls.demo.springboot.mybatis.plus.mapper")
@@ -41,7 +42,6 @@ public class MybatisPlusConfig {
         tenantSqlParser.setTenantHandler(new TenantHandler() {
 
             /**
-             * 2019-8-1
              *
              * https://gitee.com/baomidou/mybatis-plus/issues/IZZ3M
              *
@@ -51,19 +51,21 @@ public class MybatisPlusConfig {
              */
             @Override
             public Expression getTenantId(boolean where) {
-                final boolean multipleTenantIds = true;//这里只是演示切换单个tenantId和多个tenantId
-                //具体场景，可以根据情况来拼接
+                // 这里只是演示切换单个tenantId和多个tenantId
+                final boolean multipleTenantIds = false;
+
+                // 具体场景，可以根据情况来拼接
                 if (where && multipleTenantIds) {
-                    //演示如何实现tenant_id in (1,2)
+                    // 演示如何实现tenant_id in (1,2)
                     return multipleTenantIdCondition();
                 } else {
-                    //演示：tenant_id=1
+                    // 演示：tenant_id=1
                     return singleTenantIdCondition();
                 }
             }
 
             private Expression singleTenantIdCondition() {
-                return new LongValue(1);//ID自己想办法获取到
+                return new LongValue(1); // ID自己想办法获取到
             }
 
             private Expression multipleTenantIdCondition() {
@@ -71,7 +73,7 @@ public class MybatisPlusConfig {
                 inExpression.setLeftExpression(new Column(getTenantIdColumn()));
                 final ExpressionList itemsList = new ExpressionList();
                 final List<Expression> inValues = new ArrayList<>(2);
-                inValues.add(new LongValue(1));//ID自己想办法获取到
+                inValues.add(new LongValue(1)); // ID自己想办法获取到
                 inValues.add(new LongValue(2));
                 itemsList.setExpressions(inValues);
                 inExpression.setRightItemsList(itemsList);

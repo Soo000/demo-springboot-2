@@ -37,6 +37,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     }
 
     @Override
+    public UserDTO getUserByUsername(String username) {
+        UserDTO userDTO = new UserDTO();
+        UserDO userDO = userMapper.getUserByUsername(username);
+        if (userDO != null) {
+            BeanUtils.copyProperties(userDO, userDTO);
+        }
+        return userDTO;
+    }
+
+    @Override
     public UserAddrDTO getUserAndAddr(String username) {
         return userMapper.getUserAndAddr(username);
     }
