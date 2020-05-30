@@ -13,11 +13,6 @@
     <artifactId>demo-springboot-2-oauth-server</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.mengxuegu</groupId>
-            <artifactId>mengxuegu-cloud-oauth2-base</artifactId>
-            <version>${mengxuegu-security.version}</version>
-        </dependency>
         <!--spring mvc相关的-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -28,20 +23,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
-
-        <!-- 注册到 Eureka
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        -->
-
         <!-- redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
         <!--mybatis-plus启动器-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -51,7 +37,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-
         <!--druid连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -85,18 +70,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--启动类-->
-                <configuration>
-                    <mainClass>com.mengxuegu.oauth2.AuthServerApplication</mainClass>
-                </configuration>
-
             </plugin>
         </plugins>
     </build>
