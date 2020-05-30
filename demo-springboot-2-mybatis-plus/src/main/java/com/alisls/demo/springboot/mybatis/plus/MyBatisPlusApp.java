@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2020/5/29
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.alisls.demo.springboot.mybatis.plus.dao")
+@MapperScan(basePackages = "com.alisls.demo.springboot.mybatis.plus.mapper")
 public class MyBatisPlusApp {
 
     public static void main(String[] args) {

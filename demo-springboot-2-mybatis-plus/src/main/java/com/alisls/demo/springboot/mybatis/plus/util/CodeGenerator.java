@@ -23,9 +23,7 @@ import java.util.Scanner;
 public class CodeGenerator {
 
     /**
-     * <p>
      * 读取控制台内容
-     * </p>
      */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
@@ -49,7 +47,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("jobob");
+        gc.setAuthor("Ke Wang");
         gc.setOpen(false);
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
@@ -65,7 +63,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"));
+        pc.setModuleName(scanner("user"));
         pc.setParent("com.alisls.demo.springboot.mybatis.plus");
         mpg.setPackageInfo(pc);
 
@@ -130,8 +128,10 @@ public class CodeGenerator {
         strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
+
         // 公共父类
         strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
+
         // 写于父类中的公共字段
         strategy.setSuperEntityColumns("id");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));

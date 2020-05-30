@@ -1,10 +1,11 @@
 package com.alisls.demo.springboot.mybatis.plus.service.impl;
 
-import com.alisls.demo.springboot.mybatis.plus.dao.UserDAO;
+import com.alisls.demo.springboot.mybatis.plus.dto.UserAddrDTO;
+import com.alisls.demo.springboot.mybatis.plus.mapper.UserMapper;
 import com.alisls.demo.springboot.mybatis.plus.dto.UserDTO;
 import com.alisls.demo.springboot.mybatis.plus.entity.UserDO;
 import com.alisls.demo.springboot.mybatis.plus.service.UserService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -19,15 +20,15 @@ import java.util.List;
  */
 @Service("userService")
 @AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements UserService {
 
-    private final UserDAO userDAO;
+    private final UserMapper userMapper;
 
     @Override
     public UserDTO getUser(Long id) {
         UserDTO userDTO = new UserDTO();
 
-        UserDO userDO = userDAO.selectById(id);
+        UserDO userDO = userMapper.selectById(id);
         if (userDO != null) {
             BeanUtils.copyProperties(userDO, userDTO);
         }
@@ -36,7 +37,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserAddrDTO getUserAndAddr(String username) {
+        return userMapper.getUserAndAddr(username);
+    }
+
+    @Override
     public List<UserDTO> listAll() {
+        List<UserDO> list = this.list();
         return null;
     }
 
@@ -44,7 +51,8 @@ public class UserServiceImpl implements UserService {
     public UserDTO saveUser(UserDTO userDTO) {
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(userDTO, userDO);
-        int count = userDAO.insert(userDO);
+        userDO.setDeleted(0);
+        int count = userMapper.insert(userDO);
         userDTO.setId(userDO.getId());
         return userDTO;
     }
