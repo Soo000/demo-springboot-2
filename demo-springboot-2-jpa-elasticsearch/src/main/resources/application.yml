@@ -1,8 +1,8 @@
 server:
-  port: 8080
+  port: 10031
   
 spring:
   data:
     elasticsearch:
-      cluster-name: es-cluster
-      cluster-nodes: 192.168.1.117:9300
+#      cluster-name: es-cluster
+      cluster-nodes: 192.168.1.116:9300
