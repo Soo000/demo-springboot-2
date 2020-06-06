@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 描述信息
+ * 用户DTO
  *
  * @author Ke Wang
  * @date 2020/6/2
@@ -24,12 +24,18 @@ public class UserDTO implements Serializable {
 
     private String lastName;
 
+    private String email;
+
     private Integer age;
 
     private Integer gender;
 
+    private Integer deleted;
+
     private Date gmtModified;
 
     private Date gmtCreate;
+
+    private Integer tenantId;
 
 }

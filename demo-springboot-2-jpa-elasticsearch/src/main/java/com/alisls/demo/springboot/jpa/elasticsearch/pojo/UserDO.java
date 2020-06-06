@@ -19,7 +19,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@Document(indexName = "es_user", type = "doc", shards = 1, replicas = 1)
+@Document(indexName = "es_user", type = "_doc", shards = 1, replicas = 1)
 public class UserDO {
 
     @Id
@@ -33,15 +33,24 @@ public class UserDO {
     private String lastName;
 
     @Field(type = FieldType.Keyword)
-    private Integer age;
+    private String email;
 
     @Field(type = FieldType.Keyword)
     private Integer gender;
+
+    @Field(type = FieldType.Keyword)
+    private Integer age;
+
+    @Field(type = FieldType.Keyword)
+    private Integer deleted;
 
     @Field(type = FieldType.Date)
     private Date gmtModified;
 
     @Field(type = FieldType.Date)
     private Date gmtCreate;
+
+    @Field(type = FieldType.Keyword)
+    private Integer tenantId;
 
 }
