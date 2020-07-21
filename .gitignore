@@ -21,3 +21,5 @@ gen/
 .classpath  
 .project  
 .DS_Store
+demo-springboot-2-jpa/target/
+demo-springboot-2-jpa-elasticsearch/target/classes/

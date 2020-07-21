@@ -11,44 +11,26 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.util.Date;
 
 /**
- * 用户DO
+ * 描述信息
  *
  * @author Ke Wang
- * @date 2020/6/2
+ * @date 2020/6/12
  */
 @Getter
 @Setter
 @ToString
-@Document(indexName = "es_user", type = "_doc", shards = 1, replicas = 1)
-public class UserDO {
+@Document(indexName = "es_role", type = "_doc", shards = 1, replicas = 1)
+public class RoleDO {
 
     @Id
     @Field(type = FieldType.Keyword)
     private Long id;
 
     @Field(type = FieldType.Keyword)
-    private String username;
+    private String roleCode;
 
     @Field(type = FieldType.Text)
-    private String firstName;
-
-    @Field(type = FieldType.Text)
-    private String lastName;
-
-    @Field(type = FieldType.Text)
-    private String fullName;
-
-    @Field(type = FieldType.Keyword)
-    private String email;
-
-    @Field(type = FieldType.Keyword)
-    private String mobile;
-
-    @Field(type = FieldType.Keyword)
-    private Integer gender;
-
-    @Field(type = FieldType.Keyword)
-    private Integer age;
+    private String roleName;
 
     @Field(type = FieldType.Keyword)
     private Integer deleted;

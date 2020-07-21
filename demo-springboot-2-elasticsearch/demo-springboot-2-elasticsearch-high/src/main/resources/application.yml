@@ -1,0 +1,9 @@
+server:
+  port: 10081
+
+elasticsearch:
+  host: 192.168.1.116
+  port: 9200
+  scheme: http
+  username:
+  password:

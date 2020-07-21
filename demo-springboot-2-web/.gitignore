@@ -20,3 +20,9 @@ gen/
 .classpath  
 .project  
 .DS_Store
+
+# IntelliJ projects files
+/.idea/
+/logs/
+
+*.iml

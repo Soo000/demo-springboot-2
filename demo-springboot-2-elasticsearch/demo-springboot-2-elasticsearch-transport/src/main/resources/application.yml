@@ -1,0 +1,5 @@
+server:
+  port: 10051
+spring:
+  application:
+    name: demo-springboot-elasticsearch-transport

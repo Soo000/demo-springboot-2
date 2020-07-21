@@ -6,7 +6,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.6.RELEASE</version>
+		<!--<version>2.1.6.RELEASE</version>-->
+		<version>2.2.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -51,10 +52,11 @@
 		<module>demo-springboot-2-shiro</module>
 		<module>demo-springboot-2-rabbitmq</module>
 		<module>demo-springboot-2-redis</module>
-		<module>demo-springboot-2-redis-jpa</module>		
-		<module>demo-springboot-2-jpa-elasticsearch</module>
+		<module>demo-springboot-2-redis-jpa</module>
 		<module>demo-springboot-2-jpa</module>
+		<module>demo-springboot-2-jpa-elasticsearch</module>
         <module>demo-springboot-2-mybatis-plus</module>
+        <module>demo-springboot-2-elasticsearch</module>
     </modules>
 
 </project>
