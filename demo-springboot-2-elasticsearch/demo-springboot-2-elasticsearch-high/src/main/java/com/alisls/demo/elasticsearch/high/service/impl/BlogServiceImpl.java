@@ -5,12 +5,14 @@ import com.alisls.demo.elasticsearch.high.dto.CommentDTO;
 import com.alisls.demo.elasticsearch.high.service.BlogService;
 import com.alisls.demo.elasticsearch.high.service.DocumentService;
 import lombok.AllArgsConstructor;
+import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.join.query.HasChildQueryBuilder;
 import org.elasticsearch.join.query.HasParentQueryBuilder;
 import org.elasticsearch.join.query.JoinQueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -58,7 +60,7 @@ public class BlogServiceImpl extends BusiServiceImpl implements BlogService {
      * @return 子文档列表
      */
     @Override
-    public List<CommentDTO> getByParentTitle(String title) throws IOException {
+    public List<CommentDTO> getByHasParentTitle(String title) throws IOException {
         MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("title", title);
         HasParentQueryBuilder hasParentQueryBuilder = JoinQueryBuilders.hasParentQuery(PARENT_TYPE, matchQueryBuilder, true);
 
@@ -80,6 +82,38 @@ public class BlogServiceImpl extends BusiServiceImpl implements BlogService {
             }
         }
         return commentDTOs;
+    }
+
+    /**
+     * 根据子文档中的评论查询，返回父文档信息
+     * @param comment
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public List<BlogDTO> getByHasChildComment(String comment) throws IOException {
+        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("comment", comment);
+        ScoreMode scoreMode = ScoreMode.Total;
+        HasChildQueryBuilder hasChildQueryBuilder = JoinQueryBuilders.hasChildQuery(CHILD_TYPE, matchQueryBuilder, scoreMode);
+
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(hasChildQueryBuilder);
+
+        SearchRequest searchRequest = new SearchRequest(BLOG_COMMENTS_INDEX);
+        searchRequest.source(searchSourceBuilder);
+
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
+
+        List<BlogDTO> blogDTOs  = new ArrayList<>();
+        for(SearchHit hit : searchHits){
+            String sourceAsString = hit.getSourceAsString();
+            if (sourceAsString != null) {
+                BlogDTO blogDTO = objectMapper.readValue(sourceAsString, BlogDTO.class);
+                blogDTOs.add(blogDTO);
+            }
+        }
+        return blogDTOs;
     }
 
 }

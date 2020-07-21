@@ -36,5 +36,13 @@ public interface BlogService {
      * @param title
      * @return
      */
-    List<CommentDTO> getByParentTitle(String title) throws IOException;
+    List<CommentDTO> getByHasParentTitle(String title) throws IOException;
+
+    /**
+     * 对子文档进行查询，返回有这个子文档的父文档
+     * @param comment
+     * @return
+     * @throws IOException
+     */
+    List<BlogDTO> getByHasChildComment(String comment) throws IOException;
 }

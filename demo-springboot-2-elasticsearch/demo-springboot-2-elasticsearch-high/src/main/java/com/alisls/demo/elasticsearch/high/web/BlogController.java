@@ -52,10 +52,25 @@ public class BlogController {
      * @param title
      * @return
      */
-    @GetMapping("/getByParentTitle")
-    public List<CommentDTO> getByParentTitle(@RequestParam String title) {
+    @GetMapping("/getByHasParentTitle")
+    public List<CommentDTO> getByHasParentTitle(@RequestParam String title) {
         try {
-            return blogService.getByParentTitle(title);
+            return blogService.getByHasParentTitle(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据子文档中的评论查询，返回父文档信息
+     * @param comment
+     * @return
+     */
+    @GetMapping("/getByHasChildComment")
+    public List<BlogDTO> getByHasChildComment(@RequestParam String comment) {
+        try {
+            return blogService.getByHasChildComment(comment);
         } catch (IOException e) {
             e.printStackTrace();
         }
