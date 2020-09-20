@@ -5,12 +5,18 @@ import com.alisls.demo.springboot.mybatis.plus.mapper.UserMapper;
 import com.alisls.demo.springboot.mybatis.plus.dto.UserDTO;
 import com.alisls.demo.springboot.mybatis.plus.entity.UserDO;
 import com.alisls.demo.springboot.mybatis.plus.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * UserService实现
@@ -44,6 +50,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
             BeanUtils.copyProperties(userDO, userDTO);
         }
         return userDTO;
+    }
+
+    @Override
+    public List<UserDTO> getUserByNickname(String nickname) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.like("nickname", nickname);
+        List<UserDO> userDOs = userMapper.selectList(queryWrapper);
+
+        List<UserDTO> users = new ArrayList<>();
+        if (userDOs != null) {
+            users = userDOs.stream().map(userDO -> {
+                UserDTO userDTO = new UserDTO();
+                BeanUtils.copyProperties(userDO, userDTO);
+                return userDTO;
+            }).collect(Collectors.toList());
+        }
+        return users;
     }
 
     @Override

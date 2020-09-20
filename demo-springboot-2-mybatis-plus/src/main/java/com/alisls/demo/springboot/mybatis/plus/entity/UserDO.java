@@ -27,7 +27,11 @@ public class UserDO {
 
     private String username;
 
+    private String firstName;
+
     private String lastName;
+
+    private String nickname;
 
     private Integer age;
 
