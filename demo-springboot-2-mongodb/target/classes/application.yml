@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: demo-springboot-2-mongodb
+  data:
+    mongodb:
+      uri: mongodb://192.168.1.118:27017/testdb
+      username: root
+      password: root
