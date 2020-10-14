@@ -1,0 +1,18 @@
+server:
+  port: 10302
+
+spring:
+  application:
+    name: demo-springboot-2-rabbitmq
+  rabbitmq:
+    host: 192.168.1.117
+    port: 5672
+    username: wangke
+    password: wangke
+    virtual-host: /
+    publisher-returns: true
+    listener:
+      direct:
+        acknowledge-mode: auto
+      simple:
+        acknowledge-mode: auto
