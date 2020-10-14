@@ -17,7 +17,7 @@ public class Producer1 {
     @GetMapping(value = "send")
     public String send() {
         String content = "Date:" + System.currentTimeMillis();
-        //发送默认交换机对应的的队列kinson
+        // 发送默认交换机对应的的队列kinson
         amqpTemplate.convertAndSend("kinson", content);
         return content;
     }
