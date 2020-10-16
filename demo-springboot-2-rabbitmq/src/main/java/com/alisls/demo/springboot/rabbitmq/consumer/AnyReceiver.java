@@ -18,12 +18,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AnyReceiver {
 
-    @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(), // 注意这里不要定义队列名称,系统会随机产生
-            exchange = @Exchange(value = "fanoutExchange", type = ExchangeTypes.FANOUT))
+    @RabbitListener(
+            bindings = @QueueBinding(value = @Queue(), // 注意这里不要定义队列名称，系统会随机产生
+                exchange = @Exchange(value = "fanoutExchange", type = ExchangeTypes.FANOUT))
     )
     public void process(String payload) {
-        log.info("receive:{}",payload);
+        log.info("接收到消息：{}", payload);
     }
 
 }

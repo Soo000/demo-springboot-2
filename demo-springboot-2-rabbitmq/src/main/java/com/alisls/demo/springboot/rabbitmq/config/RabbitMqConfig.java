@@ -72,7 +72,7 @@ public class RabbitMqConfig {
      * @return
      */
     @Bean
-    Binding faoutBinding(Queue ackQueue, FanoutExchange fanoutExchange) {
+    Binding fanoutBinding(Queue ackQueue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(ackQueue).to(fanoutExchange);
     }
 
