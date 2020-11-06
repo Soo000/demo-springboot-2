@@ -14,8 +14,14 @@ import java.util.Date;
 @Setter
 public class BaseDO {
 
-    private Date gmtModified;
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 
-    private Date gmtCreate;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
 }

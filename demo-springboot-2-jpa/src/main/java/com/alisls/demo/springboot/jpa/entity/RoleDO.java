@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -22,13 +23,45 @@ import javax.persistence.Table;
 @ToString
 public class RoleDO extends BaseDO {
 
-    @Id
-    private Long id;
+    /**
+     * 角色标识
+     */
+	@Id
+	private Long id;
 
-    private String roleCode;
+    /**
+     * 角色编码
+     */
+	@Column(nullable = false, length = 10, unique = true)
+	private String roleCode;
 
-    private String roleName;
+    /**
+     * 父级角色编码
+     */
+    @Column(nullable = false, length = 10)
+	private String parentCode;
 
-    //private Short deleted;
+    /**
+     * 角色名称
+     */
+    @Column(nullable = false, length = 10)
+	private String roleName;
 
+    /**
+     * 角色状态
+     * state: 0-为生效 1-已生效 2-已作废
+     */
+    private Integer status;
+
+    /**
+     * 排序值
+     */
+    private float position;
+
+    /**
+     * 是否删除
+     */
+    @Column(name = "is_deleted")
+    private Integer deleted;
+	
 }
