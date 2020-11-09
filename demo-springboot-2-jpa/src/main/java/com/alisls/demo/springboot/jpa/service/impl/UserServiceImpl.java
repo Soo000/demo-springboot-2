@@ -1,8 +1,7 @@
 package com.alisls.demo.springboot.jpa.service.impl;
 
-import com.alisls.demo.springboot.jpa.dto.RoleDTO;
-import com.alisls.demo.springboot.jpa.dto.UserDTO;
-import com.alisls.demo.springboot.jpa.dto.UserRoleDTO;
+import com.alisls.demo.springboot.jpa.dto.user.UserDTO;
+import com.alisls.demo.springboot.jpa.entity.RoleDO;
 import com.alisls.demo.springboot.jpa.entity.UserDO;
 import com.alisls.demo.springboot.jpa.repository.UserRepository;
 import com.alisls.demo.springboot.jpa.service.RoleService;
@@ -12,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 用户Service
@@ -39,6 +40,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO getByCode(String code) {
+        UserDO userDO = userRepository.findByCode(code);
+        log.info("查询到用户DO：{}", userDO);
+
+        if (userDO == null) {
+            return null;
+        }
+
+        List<RoleDO> roleDOs = userDO.getRoles();
+        log.info("查用到用户DO后，再获取用户角色List：{}", roleDOs);
+
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(userDO, userDTO, "roles");
+
+        return userDTO;
+    }
+
+    @Override
     public UserDTO getByUsername(String username) {
         UserDO userDO = userRepository.findByCond(username);
         UserDTO userDTO = new UserDTO();
@@ -49,12 +68,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO save(UserDTO userDTO) {
         UserDO userDO = new UserDO();
+        userDTO.setId(idWorker.nextId());
         BeanUtils.copyProperties(userDTO, userDO);
-        userDO.setId(idWorker.nextId());
-
         UserDO newUserDO = userRepository.save(userDO);
-        userDTO.setId(newUserDO.getId());
-
         return userDTO;
     }
 
@@ -62,22 +78,8 @@ public class UserServiceImpl implements UserService {
      * 保存用户和角色（该方法只用于测试全局事务配置，不用于实际业务）
      */
     @Override
-    public UserRoleDTO saveUserAndRole(UserRoleDTO userRoleDTO) {
-        // 保存用户
-        this.save(userRoleDTO.getUserDTO());
-        log.info("【测试全局事务配置】保存用户成功，用户数据：{}", userRoleDTO.getUserDTO());
-
-        // 模拟抛出异常
-        if (userRoleDTO.getUserDTO().getId() != null) {
-            log.info("【测试全局事务配置】模拟抛出异常");
-            throw new RuntimeException("模拟抛出异常");
-        }
-
-        // 保存角色
-        RoleDTO roleDTO = roleService.save(userRoleDTO.getRoleDTO());
-        log.info("【测试全局事务配置】保存角色成功，角色数据：{}", userRoleDTO.getRoleDTO());
-
-        return userRoleDTO;
+    public UserDTO saveUserAndRole(UserDTO userDTO) {
+        return userDTO;
     }
 
     @Override

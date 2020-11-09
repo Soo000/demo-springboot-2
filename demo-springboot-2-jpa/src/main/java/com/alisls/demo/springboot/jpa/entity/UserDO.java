@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-public class UserDO extends BaseDO {
+public class UserDO extends BaseDO implements Serializable {
 
 	/**
 	 * 用户标识

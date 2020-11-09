@@ -1,6 +1,6 @@
 package com.alisls.demo.springboot.jpa.controller;
 
-import com.alisls.demo.springboot.jpa.dto.RoleDTO;
+import com.alisls.demo.springboot.jpa.dto.role.RoleDTO;
 import com.alisls.demo.springboot.jpa.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

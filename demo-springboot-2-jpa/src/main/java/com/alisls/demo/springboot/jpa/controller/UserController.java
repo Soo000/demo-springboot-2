@@ -1,7 +1,6 @@
 package com.alisls.demo.springboot.jpa.controller;
 
-import com.alisls.demo.springboot.jpa.dto.UserDTO;
-import com.alisls.demo.springboot.jpa.dto.UserRoleDTO;
+import com.alisls.demo.springboot.jpa.dto.user.UserDTO;
 import com.alisls.demo.springboot.jpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,14 +22,19 @@ public class UserController {
         return userService.getById(id);
     }
 
+    @GetMapping("/getByCode/{code}")
+    public UserDTO getByCode(@PathVariable String code) {
+        return userService.getByCode(code);
+    }
+
     @PostMapping("/save")
     public UserDTO save(@RequestBody UserDTO userDTO) {
         return userService.save(userDTO);
     }
 
     @PostMapping("/saveUserAndRole")
-    public UserRoleDTO saveUserAndRole(@RequestBody UserRoleDTO userRoleDTO) {
-        return userService.saveUserAndRole(userRoleDTO);
+    public UserDTO saveUserAndRole(@RequestBody UserDTO userDTO) {
+        return userService.saveUserAndRole(userDTO);
     }
 
     @PostMapping("/update/{id}")

@@ -1,16 +1,6 @@
 package com.alisls.demo.springboot.jpa.service;
 
-import com.alisls.demo.springboot.jpa.dto.RoleDTO;
-import com.alisls.demo.springboot.jpa.dto.UserDTO;
-import com.alisls.demo.springboot.jpa.dto.UserRoleDTO;
-import com.alisls.demo.springboot.jpa.entity.UserDO;
-import com.alisls.demo.springboot.jpa.repository.UserRepository;
-import com.alisls.demo.springboot.jpa.util.IdWorker;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.alisls.demo.springboot.jpa.dto.user.UserDTO;
 
 /**
  * 用户Service
@@ -21,13 +11,14 @@ public interface UserService {
 
     UserDTO getById(Long id);
 
+    UserDTO getByCode(String usercode);
+
     UserDTO getByUsername(String username);
 
     UserDTO save(UserDTO userDTO);
 
-    UserRoleDTO saveUserAndRole(UserRoleDTO userRoleDTO);
+    UserDTO saveUserAndRole(UserDTO userRoleDTO);
 
     UserDTO update(UserDTO userDTO);
-
 
 }

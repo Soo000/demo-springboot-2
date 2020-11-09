@@ -1,6 +1,6 @@
 package com.alisls.demo.springboot.jpa.service.impl;
 
-import com.alisls.demo.springboot.jpa.dto.RoleDTO;
+import com.alisls.demo.springboot.jpa.dto.role.RoleDTO;
 import com.alisls.demo.springboot.jpa.entity.RoleDO;
 import com.alisls.demo.springboot.jpa.repository.RoleRepository;
 import com.alisls.demo.springboot.jpa.service.RoleService;
